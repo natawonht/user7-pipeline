@@ -12,14 +12,14 @@ env:
   REPOSITORY: natawonht/user7-tutorial-backend
   GITREF: ${{ github.event.inputs.ref }}
   ARTIFACT_NAME: "artifact-tutorial-backend"
-  APP_RESOURCE_NAME: app-user7-az-usw3-sit-001
+  APP_RESOURCE_NAME: app-user7-az-usw3-uat-001
 
 jobs:
   deploy-app-service:
     name: Deploy
     runs-on: [ self-hosted, tutorial-be-dev, vm-user7SelfHost-az-usw3-sbx-001 ]
     environment:
-      name: sit
+      name: uat
       url: https://sit-user7-web.azure101.ml/swagger/index.html
     
     steps:
