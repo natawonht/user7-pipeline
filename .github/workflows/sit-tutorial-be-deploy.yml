@@ -11,7 +11,7 @@ on:
 env:
   REPOSITORY: natawonht/user7-tutorial-backend
   GITREF: ${{ github.event.inputs.ref }}
-  ARTIFACT_NAME: "artifact-tutorial-backend"
+  ARTIFACT_NAME: artifact-tutorial-backend
   APP_RESOURCE_NAME: app-user7-az-usw3-uat-001
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     runs-on: [ self-hosted, tutorial-be-dev, vm-user7SelfHost-az-usw3-sbx-001 ]
     environment:
       name: uat
-      url: https://uat-user7-web.azure101.ml/swagger/index.html
+      url: https://sit-natawonht-web.azure101.ml/swagger/index.html
     
     steps:
     - name: Download Artifact
@@ -36,12 +36,10 @@ jobs:
         mkdir -p ${{ env.ARTIFACT_NAME }}-${{ env.GITREF }}
         tar -zxf ${{ github.workspace }}/${{ env.ARTIFACT_NAME }}-${{ env.GITREF }}.tar.gz -C ${{ github.workspace }}/${{ env.ARTIFACT_NAME }}-${{ env.GITREF }}
         rm ${{ github.workspace }}/${{ env.ARTIFACT_NAME }}-${{ env.GITREF }}.tar.gz
-    
     - name: Login via Azure CLI
       run: |
         az login --identity --username ${{ secrets.AZURE_SELFHOST_USER_MANAGE_IDENTITY_CLIENT_ID }}
         az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
       with:
