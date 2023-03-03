@@ -1,4 +1,4 @@
-name: SIT - Tutorial BE Deploy
+name: UAT - Tutorial BE Deploy
 
 on:
   workflow_dispatch:
